@@ -1,7 +1,18 @@
 import { useState } from 'react';
-import { Button } from '../../src/components/Button/Button';
+import { 
+  Button, 
+  Card, 
+  CardHeader, 
+  CardTitle, 
+  CardDescription, 
+  CardContent, 
+  CardFooter,
+  Badge,
+  ThemeToggle,
+  ThemeProvider 
+} from '../../src/index';
 
-function App() {
+function PlaygroundContent() {
   const [loading, setLoading] = useState(false);
 
   const handleLoadingDemo = () => {
@@ -10,121 +21,238 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Star UI Playground
-          </h1>
-          <p className="text-lg text-gray-600">
-            Test and explore Star UI components in real-time
-          </p>
-        </header>
-
-        <div className="space-y-12">
-          {/* Button Variants */}
-          <section className="bg-white rounded-lg p-8 shadow-sm">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Button Variants</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="space-y-3">
-                <h3 className="text-sm font-medium text-gray-700">Primary</h3>
-                <Button variant="primary">Primary Button</Button>
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-sm font-medium text-gray-700">Secondary</h3>
-                <Button variant="secondary">Secondary Button</Button>
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-sm font-medium text-gray-700">Outline</h3>
-                <Button variant="outline">Outline Button</Button>
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-sm font-medium text-gray-700">Ghost</h3>
-                <Button variant="ghost">Ghost Button</Button>
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-sm font-medium text-gray-700">Destructive</h3>
-                <Button variant="destructive">Destructive Button</Button>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(99,102,241,0.15)_1px,transparent_0)] [background-size:50px_50px]" />
+      
+      <div className="relative z-10 py-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <header className="text-center mb-16">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <h1 className="text-5xl font-bold gradient-text">
+                Star UI Lib 2.0
+              </h1>
+              <ThemeToggle className="float" />
             </div>
-          </section>
-
-          {/* Button Sizes */}
-          <section className="bg-white rounded-lg p-8 shadow-sm">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Button Sizes</h2>
-            <div className="flex flex-wrap items-center gap-4">
-              <Button size="xs">Extra Small</Button>
-              <Button size="sm">Small</Button>
-              <Button size="md">Medium</Button>
-              <Button size="lg">Large</Button>
-              <Button size="xl">Extra Large</Button>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
+              🌟 The Future of React Components - Modern, Animated, Revolutionary
+            </p>
+            <div className="flex justify-center gap-3">
+              <Badge variant="cosmic" pulse>✨ Glassmorphism</Badge>
+              <Badge variant="gradient">🎨 Gradients</Badge>
+              <Badge variant="gradient">🔮 Animations</Badge>
             </div>
-          </section>
+          </header>
 
-          {/* Button States */}
-          <section className="bg-white rounded-lg p-8 shadow-sm">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Button States</h2>
-            <div className="flex flex-wrap items-center gap-4">
-              <Button>Normal</Button>
-              <Button disabled>Disabled</Button>
-              <Button loading={loading} onClick={handleLoadingDemo}>
-                {loading ? 'Loading...' : 'Click for Loading Demo'}
-              </Button>
+          <div className="grid gap-8">
+            {/* Revolutionary Buttons */}
+            <Card variant="gradient" hover glow className="overflow-hidden">
+              <CardHeader>
+                <CardTitle className="text-2xl gradient-text">🚀 Revolutionary Buttons</CardTitle>
+                <CardDescription>Next-generation button components with modern effects</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-8">
+                {/* Gradient Variants */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Gradient Magic</h3>
+                  <div className="flex flex-wrap gap-4">
+                    <Button variant="primary" glow>Primary Glow</Button>
+                    <Button variant="cosmic" float>Cosmic Float</Button>
+                    <Button variant="gradient" shimmer>Animated Gradient</Button>
+                    <Button variant="sunset">Sunset Vibes</Button>
+                    <Button variant="ocean">Ocean Depths</Button>
+                  </div>
+                </div>
+
+                {/* Glass & Effects */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Glass & Effects</h3>
+                  <div className="flex flex-wrap gap-4">
+                    <Button variant="gradient">Gradient Magic</Button>
+                    <Button variant="outline" glow>Outline Glow</Button>
+                    <Button variant="ghost" shimmer>Ghost Shimmer</Button>
+                    <Button variant="destructive" float>Floating Danger</Button>
+                  </div>
+                </div>
+
+                {/* Interactive States */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Interactive Magic</h3>
+                  <div className="flex flex-wrap gap-4">
+                    <Button 
+                      variant="cosmic" 
+                      loading={loading} 
+                      onClick={handleLoadingDemo}
+                      leftIcon="🚀"
+                    >
+                      {loading ? 'Launching...' : 'Launch Rocket'}
+                    </Button>
+                    <Button variant="gradient" rightIcon="✨" shimmer>
+                      Create Magic
+                    </Button>
+                    <Button variant="cosmic" leftIcon="🔮" glow>
+                      Crystal Ball
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Modern Cards Showcase */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card variant="elevated" hover float>
+                <CardHeader>
+                  <CardTitle>✨ Elevated Card</CardTitle>
+                  <CardDescription>Beautiful elevation and shadow effects</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    This card uses modern elevation and shadow effects for a clean, floating appearance.
+                  </p>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="primary" size="sm">Explore</Button>
+                  <Badge variant="primary">New</Badge>
+                </CardFooter>
+              </Card>
+
+              <Card variant="cosmic" hover glow>
+                <CardHeader>
+                  <CardTitle>🌌 Cosmic Card</CardTitle>
+                  <CardDescription>Deep space vibes</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-200">
+                    Experience the cosmos with animated gradients and ethereal glow effects.
+                  </p>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="gradient" size="sm">Launch</Button>
+                  <Badge variant="cosmic" pulse>Cosmic</Badge>
+                </CardFooter>
+              </Card>
+
+              <Card variant="gradient" hover>
+                <CardHeader>
+                  <CardTitle>🎨 Gradient Card</CardTitle>
+                  <CardDescription>Smooth color transitions</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Subtle gradients that adapt beautifully to both light and dark themes.
+                  </p>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="primary" size="sm">Design</Button>
+                  <Badge variant="gradient">Gradient</Badge>
+                </CardFooter>
+              </Card>
             </div>
-          </section>
 
-          {/* Button with Icons */}
-          <section className="bg-white rounded-lg p-8 shadow-sm">
-            <h2 className="text-2xl font-semibent text-gray-900 mb-6">Buttons with Icons</h2>
-            <div className="flex flex-wrap items-center gap-4">
-              <Button leftIcon="👍" variant="primary">
-                Like
-              </Button>
-              <Button rightIcon="→" variant="outline">
-                Next Step
-              </Button>
-              <Button leftIcon="📁" rightIcon="📤" variant="secondary">
-                Save & Export
-              </Button>
-              <Button leftIcon="⚙️" variant="ghost">
-                Settings
-              </Button>
-            </div>
-          </section>
+            {/* Badge Gallery */}
+            <Card variant="elevated" hover>
+              <CardHeader>
+                <CardTitle className="gradient-text">🏷️ Modern Badges</CardTitle>
+                <CardDescription>Eye-catching status indicators</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">Gradient Collection</h3>
+                  <div className="flex flex-wrap gap-3">
+                    <Badge variant="primary">Primary</Badge>
+                    <Badge variant="success">Success</Badge>
+                    <Badge variant="warning">Warning</Badge>
+                    <Badge variant="danger">Danger</Badge>
+                    <Badge variant="gradient">Animated</Badge>
+                    <Badge variant="cosmic" pulse>Cosmic</Badge>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">Special Effects</h3>
+                  <div className="flex flex-wrap gap-3">
+                    <Badge variant="gradient">Gradient Effect</Badge>
+                    <Badge variant="primary" glow>Glowing</Badge>
+                    <Badge variant="cosmic" dot>With Dot</Badge>
+                    <Badge variant="gradient" pulse>Pulsing</Badge>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-          {/* Interactive Demo */}
-          <section className="bg-white rounded-lg p-8 shadow-sm">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Interactive Demo</h2>
-            <div className="space-y-4">
-              <p className="text-gray-600">
-                This playground allows you to test Star UI components in real-time.
-                You can modify the source code in the playground and see changes immediately.
+            {/* Interactive Demo */}
+            <Card variant="gradient" hover className="text-center">
+              <CardHeader>
+                <CardTitle className="text-3xl gradient-text">🎮 Interactive Playground</CardTitle>
+                <CardDescription className="text-lg">
+                  Experience the magic - hover, click, and explore!
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h3 className="font-semibold">🎯 Click Effects</h3>
+                    <div className="space-y-3">
+                      <Button 
+                        variant="cosmic" 
+                        onClick={() => alert('🌟 Cosmic power activated!')}
+                        className="w-full"
+                        glow
+                      >
+                        Cosmic Alert
+                      </Button>
+                      <Button 
+                        variant="gradient" 
+                        onClick={() => console.log('🚀 Gradient logged!')}
+                        className="w-full"
+                        shimmer
+                      >
+                        Console Magic
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <h3 className="font-semibold">✨ Hover Magic</h3>
+                    <div className="space-y-3">
+                      <Button variant="ocean" className="w-full" float>
+                        Floating Ocean
+                      </Button>
+                      <Button variant="sunset" className="w-full" glow>
+                        Sunset Glow
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Footer */}
+          <footer className="text-center mt-16 pt-8">
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 inline-block shadow-xl">
+              <p className="text-gray-600 dark:text-gray-300 text-lg">
+                ✨ Built with <span className="gradient-text font-semibold">Star UI Lib 2.0</span> • The Future is Here
               </p>
-              <div className="flex gap-4">
-                <Button 
-                  variant="primary" 
-                  onClick={() => alert('Hello from Star UI!')}
-                >
-                  Show Alert
-                </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={() => console.log('Button clicked!')}
-                >
-                  Log to Console
-                </Button>
+              <div className="flex justify-center gap-2 mt-4">
+                <Badge variant="cosmic">Modern</Badge>
+                <Badge variant="gradient">Innovative</Badge>
+                <Badge variant="gradient">Beautiful</Badge>
               </div>
             </div>
-          </section>
+          </footer>
         </div>
-
-        <footer className="text-center mt-12 pt-8 border-t border-gray-200">
-          <p className="text-gray-500">
-            Built with Star UI • A modern React component library
-          </p>
-        </footer>
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider defaultTheme="light">
+      <PlaygroundContent />
+    </ThemeProvider>
   );
 }
 
