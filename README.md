@@ -1,4 +1,4 @@
-# Star UI
+# Star UI Lib
 
 A modern React UI component library built with TypeScript and Tailwind CSS.
 
@@ -14,16 +14,15 @@ A modern React UI component library built with TypeScript and Tailwind CSS.
 ## Installation
 
 ```bash
-npm install star-ui
+npm install star-ui-lib
 # or
-yarn add star-ui
+yarn add star-ui-lib
 ```
 
 ## Usage
 
 ```jsx
-import { Button } from 'star-ui';
-import 'star-ui/dist/index.css'; // Import styles
+import { Button } from 'star-ui-lib';
 
 function App() {
   return (
