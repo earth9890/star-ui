@@ -72,6 +72,9 @@ import { Button } from 'star-ui';
 # Install dependencies
 npm install
 
+# Start component playground
+npm run playground
+
 # Start Storybook
 npm run storybook
 
@@ -85,10 +88,26 @@ npm test
 npm run lint
 ```
 
+## Playground
+
+The library includes a live playground where you can test components in real-time:
+
+```bash
+# Start the playground (builds library + starts dev server)
+npm run playground
+
+# Build playground for production
+npm run playground:build
+```
+
+The playground runs at `http://localhost:3000` and automatically uses your latest library build.
+
 ## Scripts
 
 - `npm run build` - Build the library for production
 - `npm run dev` - Build in watch mode
+- `npm run playground` - Start the component playground
+- `npm run playground:build` - Build playground for production
 - `npm run storybook` - Start Storybook development server
 - `npm run build-storybook` - Build Storybook for production
 - `npm run lint` - Lint the codebase

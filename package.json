@@ -15,6 +15,8 @@
     "dev": "rollup -c -w",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "playground": "npm run build && cd playground && npm run dev",
+    "playground:build": "cd playground && npm run build",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "typecheck": "tsc --noEmit",
