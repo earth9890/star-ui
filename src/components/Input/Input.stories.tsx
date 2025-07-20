@@ -328,22 +328,24 @@ export const IconsAndAddons: Story = {
 };
 
 // Clearable Input
+const ClearableExample = () => {
+  const [value, setValue] = useState('Clear me!');
+  
+  return (
+    <div className="w-80">
+      <Input 
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Type something..." 
+        clearable
+        onClear={() => setValue('')}
+      />
+    </div>
+  );
+};
+
 export const Clearable: Story = {
-  render: () => {
-    const [value, setValue] = useState('Clear me!');
-    
-    return (
-      <div className="w-80">
-        <Input 
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="Type something..." 
-          clearable
-          onClear={() => setValue('')}
-        />
-      </div>
-    );
-  },
+  render: () => <ClearableExample />,
 };
 
 // Input Types
@@ -381,98 +383,100 @@ export const WithEffects: Story = {
 };
 
 // Form Example
-export const FormExample: Story = {
-  render: () => {
-    const [formData, setFormData] = useState({
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    });
+const FormExampleComponent = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
-    const [errors, setErrors] = useState({
-      email: false,
-      password: false,
-      confirmPassword: false,
-    });
+  const [errors, setErrors] = useState({
+    email: false,
+    password: false,
+    confirmPassword: false,
+  });
 
-    const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData({ ...formData, [field]: e.target.value });
+  const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [field]: e.target.value });
+    
+    // Simple validation
+    if (field === 'email') {
+      setErrors({ ...errors, email: !e.target.value.includes('@') });
+    }
+    if (field === 'password') {
+      setErrors({ ...errors, password: e.target.value.length < 8 });
+    }
+    if (field === 'confirmPassword') {
+      setErrors({ ...errors, confirmPassword: e.target.value !== formData.password });
+    }
+  };
+
+  return (
+    <form className="flex flex-col space-y-4 w-96 p-6 bg-card dark:bg-dark-card rounded-lg border border-border dark:border-dark-border">
+      <h2 className="text-xl font-semibold mb-2">Create Account</h2>
       
-      // Simple validation
-      if (field === 'email') {
-        setErrors({ ...errors, email: !e.target.value.includes('@') });
-      }
-      if (field === 'password') {
-        setErrors({ ...errors, password: e.target.value.length < 8 });
-      }
-      if (field === 'confirmPassword') {
-        setErrors({ ...errors, confirmPassword: e.target.value !== formData.password });
-      }
-    };
+      <Input
+        label="Full Name"
+        placeholder="John Doe"
+        value={formData.name}
+        onChange={handleChange('name')}
+        leftIcon={<User />}
+        required
+      />
+      
+      <Input
+        label="Email"
+        type="email"
+        placeholder="john@example.com"
+        value={formData.email}
+        onChange={handleChange('email')}
+        leftIcon={<Mail />}
+        error={errors.email && formData.email.length > 0}
+        errorMessage={errors.email && formData.email.length > 0 ? "Please enter a valid email" : undefined}
+        required
+      />
+      
+      <Input
+        label="Password"
+        type="password"
+        placeholder="••••••••"
+        value={formData.password}
+        onChange={handleChange('password')}
+        leftIcon={<Lock />}
+        error={errors.password && formData.password.length > 0}
+        errorMessage={errors.password && formData.password.length > 0 ? "Password must be at least 8 characters" : undefined}
+        helperText="Use at least 8 characters"
+        required
+      />
+      
+      <Input
+        label="Confirm Password"
+        type="password"
+        placeholder="••••••••"
+        value={formData.confirmPassword}
+        onChange={handleChange('confirmPassword')}
+        leftIcon={<Lock />}
+        error={errors.confirmPassword && formData.confirmPassword.length > 0}
+        errorMessage={errors.confirmPassword && formData.confirmPassword.length > 0 ? "Passwords don't match" : undefined}
+        success={!errors.confirmPassword && formData.confirmPassword.length > 0}
+        successMessage={!errors.confirmPassword && formData.confirmPassword.length > 0 ? "Passwords match!" : undefined}
+        required
+      />
+      
+      <button 
+        type="submit"
+        className="mt-4 px-4 py-2 bg-button-primary text-button-text rounded-md hover:bg-button-primary-hover transition-colors"
+        onClick={(e) => e.preventDefault()}
+      >
+        Create Account
+      </button>
+    </form>
+  );
+};
 
-    return (
-      <form className="flex flex-col space-y-4 w-96 p-6 bg-card dark:bg-dark-card rounded-lg border border-border dark:border-dark-border">
-        <h2 className="text-xl font-semibold mb-2">Create Account</h2>
-        
-        <Input
-          label="Full Name"
-          placeholder="John Doe"
-          value={formData.name}
-          onChange={handleChange('name')}
-          leftIcon={<User />}
-          required
-        />
-        
-        <Input
-          label="Email"
-          type="email"
-          placeholder="john@example.com"
-          value={formData.email}
-          onChange={handleChange('email')}
-          leftIcon={<Mail />}
-          error={errors.email && formData.email.length > 0}
-          errorMessage={errors.email && formData.email.length > 0 ? "Please enter a valid email" : undefined}
-          required
-        />
-        
-        <Input
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-          value={formData.password}
-          onChange={handleChange('password')}
-          leftIcon={<Lock />}
-          error={errors.password && formData.password.length > 0}
-          errorMessage={errors.password && formData.password.length > 0 ? "Password must be at least 8 characters" : undefined}
-          helperText="Use at least 8 characters"
-          required
-        />
-        
-        <Input
-          label="Confirm Password"
-          type="password"
-          placeholder="••••••••"
-          value={formData.confirmPassword}
-          onChange={handleChange('confirmPassword')}
-          leftIcon={<Lock />}
-          error={errors.confirmPassword && formData.confirmPassword.length > 0}
-          errorMessage={errors.confirmPassword && formData.confirmPassword.length > 0 ? "Passwords don't match" : undefined}
-          success={!errors.confirmPassword && formData.confirmPassword.length > 0}
-          successMessage={!errors.confirmPassword && formData.confirmPassword.length > 0 ? "Passwords match!" : undefined}
-          required
-        />
-        
-        <button 
-          type="submit"
-          className="mt-4 px-4 py-2 bg-button-primary text-button-text rounded-md hover:bg-button-primary-hover transition-colors"
-          onClick={(e) => e.preventDefault()}
-        >
-          Create Account
-        </button>
-      </form>
-    );
-  },
+export const FormExample: Story = {
+  render: () => <FormExampleComponent />,
 };
 
 // Dark Mode Example
