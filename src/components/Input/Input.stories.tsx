@@ -180,7 +180,8 @@ export const WithIcons: Story = {
       />
       <Input 
         placeholder="Enter amount" 
-        rightIcon={<DollarSign />}
+				rightIcon={<DollarSign />}
+				leftIcon={<DollarSign />}
       />
       <Input 
         placeholder="Password" 
@@ -211,23 +212,100 @@ export const WithAddons: Story = {
     <div className="flex flex-col space-y-4 w-96">
       <Input 
         placeholder="Username" 
-        leftAddon={<span className="text-foreground-tertiary">@</span>}
+        leftAddon={<span className="text-text-tertiary">@</span>}
       />
       <Input 
         placeholder="Website" 
-        leftAddon={<span className="text-foreground-tertiary">https://</span>}
-        rightAddon={<span className="text-foreground-tertiary">.com</span>}
+        leftAddon={<span className="text-text-tertiary">https://</span>}
+        rightAddon={<span className="text-text-tertiary">.com</span>}
       />
       <Input 
         placeholder="Price" 
-        leftAddon={<span className="text-foreground-tertiary">$</span>}
-        rightAddon={<span className="text-foreground-tertiary">USD</span>}
+        leftAddon={<span className="text-text-tertiary">$</span>}
+        rightAddon={<span className="text-text-tertiary">USD</span>}
       />
       <Input 
         placeholder="Email" 
         rightAddon={
-          <button className="px-2 py-1 text-sm bg-primary-500 text-white rounded hover:bg-primary-600 transition-colors">
+          <button className="px-2 py-1 text-sm bg-button-primary text-button-text rounded hover:bg-button-primary-hover transition-colors">
             Subscribe
+          </button>
+        }
+      />
+    </div>
+  ),
+};
+
+// Addons with Different Variants
+export const AddonsWithVariants: Story = {
+  render: () => (
+    <div className="flex flex-col space-y-4 w-96">
+      <Input 
+        variant="default"
+        placeholder="Default with addons" 
+        leftAddon={<User size={16} />}
+        rightAddon={<span className="text-text-tertiary">.com</span>}
+      />
+      <Input 
+        variant="outline"
+        placeholder="Outline with addons" 
+        leftAddon={<Mail size={16} />}
+        rightAddon={<span className="text-text-tertiary">@gmail</span>}
+      />
+      <Input 
+        variant="filled"
+        placeholder="Filled with addons" 
+        leftAddon={<span className="text-text-tertiary">$</span>}
+        rightAddon={<span className="text-text-tertiary">USD</span>}
+      />
+      <Input 
+        variant="ghost"
+        placeholder="Ghost with addons" 
+        leftAddon={<Phone size={16} />}
+        rightAddon={<span className="text-text-tertiary">ext. 123</span>}
+      />
+      <Input 
+        variant="flushed"
+        placeholder="Flushed with addons" 
+        leftAddon={<Globe size={16} />}
+        rightAddon={<span className="text-text-tertiary">.org</span>}
+      />
+    </div>
+  ),
+};
+
+// Icons and Addons Combined
+export const IconsAndAddons: Story = {
+  render: () => (
+    <div className="flex flex-col space-y-4 w-96">
+      <Input 
+        placeholder="Search users..." 
+        leftIcon={<Search />}
+        rightAddon={
+          <button className="text-sm text-button-primary hover:text-button-primary-hover transition-colors">
+            Advanced
+          </button>
+        }
+      />
+      <Input 
+        placeholder="Enter amount" 
+        leftAddon={<span className="text-text-tertiary">$</span>}
+        rightIcon={<DollarSign />}
+        type="number"
+      />
+      <Input 
+        // placeholder="johndoe" 
+        leftAddon={<span className="text-text-tertiary">github.com/</span>}
+        leftIcon={<User />}
+        clearable
+      />
+      <Input 
+        placeholder="Enter password"
+        type="password"
+        leftIcon={<Lock />}
+        rightAddon={
+          <button className="text-sm text-text-tertiary hover:text-text-primary transition-colors">
+            <Eye size={16} />
           </button>
         }
       />
@@ -373,7 +451,7 @@ export const FormExample: Story = {
         
         <button 
           type="submit"
-          className="mt-4 px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors"
+          className="mt-4 px-4 py-2 bg-button-primary text-button-text rounded-md hover:bg-button-primary-hover transition-colors"
           onClick={(e) => e.preventDefault()}
         >
           Create Account

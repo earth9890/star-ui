@@ -79,12 +79,37 @@ const inputVariants: Record<InputVariant, string> = {
   `,
 };
 
+// Separate variants for when addons are present
+const inputVariantsWithLeftAddon: Record<InputVariant, string> = {
+  default: 'border-l-0 rounded-l-none',
+  outline: 'border-l-0 rounded-l-none',
+  filled: 'border-l-0 rounded-l-none',
+  ghost: 'border-l-0 rounded-l-none',
+  flushed: '',
+};
+
+const inputVariantsWithRightAddon: Record<InputVariant, string> = {
+  default: 'border-r-0 rounded-r-none',
+  outline: 'border-r-0 rounded-r-none',
+  filled: 'border-r-0 rounded-r-none',
+  ghost: 'border-r-0 rounded-r-none',
+  flushed: '',
+};
+
 const inputSizes: Record<Size, string> = {
   xs: 'h-8 text-xs px-2.5',
   sm: 'h-9 text-sm px-3',
   md: 'h-10 text-base px-4',
   lg: 'h-12 text-lg px-5',
   xl: 'h-14 text-xl px-6',
+};
+
+const addonSizes: Record<Size, string> = {
+  xs: 'h-8 text-xs',
+  sm: 'h-9 text-sm',
+  md: 'h-10 text-base',
+  lg: 'h-12 text-lg',
+  xl: 'h-14 text-xl',
 };
 
 const iconSizes: Record<Size, number> = {
@@ -171,11 +196,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       stateClasses,
       effectClasses,
       paddingClasses,
+      leftAddon && inputVariantsWithLeftAddon[variant],
+      rightAddon && inputVariantsWithRightAddon[variant],
       {
-        'rounded-l-none': leftAddon,
-        'rounded-r-none': rightAddon,
         'w-full': fullWidth,
-        'rounded-xl': variant !== 'flushed',
+        'rounded-xl': variant !== 'flushed' && !leftAddon && !rightAddon,
+        'rounded-r-xl': variant !== 'flushed' && leftAddon && !rightAddon,
+        'rounded-l-xl': variant !== 'flushed' && !leftAddon && rightAddon,
       },
       className
     );
@@ -230,29 +257,56 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className={cn('relative', { 'w-full': fullWidth })}>
         {labelPosition === 'top' && renderLabel()}
         
-        <div className={cn('relative flex', { 'mt-1': label && labelPosition === 'top' })}>
+        <div className={cn(
+          'relative flex',
+          { 'mt-1': label && labelPosition === 'top' },
+          (leftAddon || rightAddon) && variant !== 'flushed' && 'shadow-sm hover:shadow-md transition-shadow duration-300 rounded-xl overflow-hidden'
+        )}>
           {labelPosition === 'inline' && renderLabel()}
           
           {leftAddon && (
-            <div className="flex items-center px-3 bg-gradient-to-b from-background-secondary to-background-tertiary dark:from-dark-background-secondary dark:to-dark-background-tertiary border border-r-0 border-field-border dark:border-dark-field-border rounded-l-xl shadow-sm font-medium text-text-secondary dark:text-dark-text-secondary">
+            <div className={cn(
+              "flex items-center gap-2 px-3 font-medium text-text-secondary dark:text-dark-text-secondary",
+              "border border-r-0 border-field-border dark:border-dark-field-border",
+              "bg-background-secondary dark:bg-dark-background-secondary",
+              "rounded-l-xl",
+              addonSizes[size],
+              variant === 'outline' && 'border-2 border-border-interactive dark:border-dark-border-interactive',
+              variant === 'filled' && 'bg-gradient-to-b from-background-secondary to-background-tertiary dark:from-dark-background-secondary dark:to-dark-background-tertiary border-transparent',
+              variant === 'ghost' && 'border-transparent bg-transparent',
+              variant === 'flushed' && 'border-0 border-b-2 border-field-border dark:border-dark-field-border rounded-none bg-transparent px-0'
+            )}>
               {leftAddon}
+              {leftIcon && (
+                <div 
+                  className="flex items-center justify-center text-field-icon dark:text-dark-text-muted"
+                  style={{ width: iconSizes[size], height: iconSizes[size] }}
+                >
+                  {React.isValidElement(leftIcon) ? React.cloneElement(leftIcon as React.ReactElement<any>, {
+                    size: iconSizes[size],
+                    width: iconSizes[size],
+                    height: iconSizes[size],
+                    strokeWidth: 2,
+                  }) : leftIcon}
+                </div>
+              )}
             </div>
           )}
           
           <div className="relative flex-1">
             {labelPosition === 'floating' && renderLabel()}
             
-            {leftIcon && (
+            {leftIcon && !leftAddon && (
               <div 
-                className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-field-icon dark:text-dark-text-muted pointer-events-none"
+                className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-field-icon dark:text-dark-text-muted pointer-events-none z-10"
                 style={{ width: iconSizes[size], height: iconSizes[size] }}
               >
-                {React.isValidElement(leftIcon) && React.cloneElement(leftIcon as React.ReactElement<any>, {
+                {React.isValidElement(leftIcon) ? React.cloneElement(leftIcon as React.ReactElement<any>, {
                   size: iconSizes[size],
                   width: iconSizes[size],
                   height: iconSizes[size],
                   strokeWidth: 2,
-                })}
+                }) : leftIcon}
               </div>
             )}
             
@@ -289,23 +343,46 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               </div>
             )}
             
-            {rightIcon && !loading && !clearable && (
+            {rightIcon && !loading && !clearable && !rightAddon && (
               <div 
                 className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-field-icon dark:text-dark-text-muted pointer-events-none"
                 style={{ width: iconSizes[size], height: iconSizes[size] }}
               >
-                {React.isValidElement(rightIcon) && React.cloneElement(rightIcon as React.ReactElement<any>, {
+                {React.isValidElement(rightIcon) ? React.cloneElement(rightIcon as React.ReactElement<any>, {
                   size: iconSizes[size],
                   width: iconSizes[size],
                   height: iconSizes[size],
                   strokeWidth: 2,
-                })}
+                }) : rightIcon}
               </div>
             )}
           </div>
           
           {rightAddon && (
-            <div className="flex items-center px-3 bg-gradient-to-b from-background-secondary to-background-tertiary dark:from-dark-background-secondary dark:to-dark-background-tertiary border border-l-0 border-field-border dark:border-dark-field-border rounded-r-xl shadow-sm font-medium text-text-secondary dark:text-dark-text-secondary">
+            <div className={cn(
+              "flex items-center gap-2 px-3 font-medium text-text-secondary dark:text-dark-text-secondary",
+              "border border-l-0 border-field-border dark:border-dark-field-border",
+              "bg-background-secondary dark:bg-dark-background-secondary",
+              "rounded-r-xl",
+              addonSizes[size],
+              variant === 'outline' && 'border-2 border-border-interactive dark:border-dark-border-interactive',
+              variant === 'filled' && 'bg-gradient-to-b from-background-secondary to-background-tertiary dark:from-dark-background-secondary dark:to-dark-background-tertiary border-transparent',
+              variant === 'ghost' && 'border-transparent bg-transparent',
+              variant === 'flushed' && 'border-0 border-b-2 border-field-border dark:border-dark-field-border rounded-none bg-transparent px-0'
+            )}>
+              {rightIcon && !loading && !clearable && (
+                <div 
+                  className="flex items-center justify-center text-field-icon dark:text-dark-text-muted"
+                  style={{ width: iconSizes[size], height: iconSizes[size] }}
+                >
+                  {React.isValidElement(rightIcon) ? React.cloneElement(rightIcon as React.ReactElement<any>, {
+                    size: iconSizes[size],
+                    width: iconSizes[size],
+                    height: iconSizes[size],
+                    strokeWidth: 2,
+                  }) : rightIcon}
+                </div>
+              )}
               {rightAddon}
             </div>
           )}
