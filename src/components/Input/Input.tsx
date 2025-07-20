@@ -27,7 +27,7 @@ export interface InputProps
   errorMessage?: string;
   successMessage?: string;
   label?: string;
-  labelPosition?: 'top' | 'floating' | 'inline';
+  labelPosition?: 'top' | 'bottom' | 'left' | 'right';
   required?: boolean;
   clearable?: boolean;
   onClear?: () => void;
@@ -213,9 +213,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       const labelClasses = cn(
         'text-sm font-semibold text-field-label dark:text-dark-text-secondary',
         {
-          'mb-2 block': labelPosition === 'top',
-          'ml-2 inline-flex items-center': labelPosition === 'inline',
-          'absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-200': labelPosition === 'floating',
+          'ml-1 mb-2 block': labelPosition === 'top',
+          'ml-1 mt-2 block': labelPosition === 'bottom',
+          'mr-3 flex items-center': labelPosition === 'left',
+          'ml-3 flex items-center': labelPosition === 'right',
         }
       );
 
@@ -258,43 +259,45 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {labelPosition === 'top' && renderLabel()}
         
         <div className={cn(
-          'relative flex',
-          { 'mt-1': label && labelPosition === 'top' },
-          (leftAddon || rightAddon) && variant !== 'flushed' && 'shadow-sm hover:shadow-md transition-shadow duration-300 rounded-xl overflow-hidden'
+          'relative flex items-center',
+          { 'mt-1': label && labelPosition === 'top' }
         )}>
-          {labelPosition === 'inline' && renderLabel()}
+          {labelPosition === 'left' && renderLabel()}
           
-          {leftAddon && (
-            <div className={cn(
-              "flex items-center gap-2 px-3 font-medium text-text-secondary dark:text-dark-text-secondary",
-              "border border-r-0 border-field-border dark:border-dark-field-border",
-              "bg-background-secondary dark:bg-dark-background-secondary",
-              "rounded-l-xl",
-              addonSizes[size],
-              variant === 'outline' && 'border-2 border-border-interactive dark:border-dark-border-interactive',
-              variant === 'filled' && 'bg-gradient-to-b from-background-secondary to-background-tertiary dark:from-dark-background-secondary dark:to-dark-background-tertiary border-transparent',
-              variant === 'ghost' && 'border-transparent bg-transparent',
-              variant === 'flushed' && 'border-0 border-b-2 border-field-border dark:border-dark-field-border rounded-none bg-transparent px-0'
-            )}>
-              {leftAddon}
-              {leftIcon && (
-                <div 
-                  className="flex items-center justify-center text-field-icon dark:text-dark-text-muted"
-                  style={{ width: iconSizes[size], height: iconSizes[size] }}
-                >
-                  {React.isValidElement(leftIcon) ? React.cloneElement(leftIcon as React.ReactElement<any>, {
-                    size: iconSizes[size],
-                    width: iconSizes[size],
-                    height: iconSizes[size],
-                    strokeWidth: 2,
-                  }) : leftIcon}
-                </div>
-              )}
-            </div>
-          )}
-          
-          <div className="relative flex-1">
-            {labelPosition === 'floating' && renderLabel()}
+          <div className={cn(
+            'relative flex flex-1',
+            (leftAddon || rightAddon) && variant !== 'flushed' && 'shadow-sm hover:shadow-md transition-shadow duration-300 rounded-xl overflow-hidden'
+          )}>
+            {leftAddon && (
+              <div className={cn(
+                "flex items-center gap-2 px-3 font-medium text-text-secondary dark:text-dark-text-secondary",
+                "border border-r-0 border-field-border dark:border-dark-field-border",
+                "bg-background-secondary dark:bg-dark-background-secondary",
+                "rounded-l-xl",
+                addonSizes[size],
+                variant === 'outline' && 'border-2 border-border-interactive dark:border-dark-border-interactive',
+                variant === 'filled' && 'bg-gradient-to-b from-background-secondary to-background-tertiary dark:from-dark-background-secondary dark:to-dark-background-tertiary border-transparent',
+                variant === 'ghost' && 'border-transparent bg-transparent',
+                variant === 'flushed' && 'border-0 border-b-2 border-field-border dark:border-dark-field-border rounded-none bg-transparent px-0'
+              )}>
+                {leftAddon}
+                {leftIcon && (
+                  <div 
+                    className="flex items-center justify-center text-field-icon dark:text-dark-text-muted"
+                    style={{ width: iconSizes[size], height: iconSizes[size] }}
+                  >
+                    {React.isValidElement(leftIcon) ? React.cloneElement(leftIcon as React.ReactElement<any>, {
+                      size: iconSizes[size],
+                      width: iconSizes[size],
+                      height: iconSizes[size],
+                      strokeWidth: 2,
+                    }) : leftIcon}
+                  </div>
+                )}
+              </div>
+            )}
+            
+            <div className="relative flex-1">
             
             {leftIcon && !leftAddon && (
               <div 
@@ -356,9 +359,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 }) : rightIcon}
               </div>
             )}
-          </div>
-          
-          {rightAddon && (
+            </div>
+            
+            {rightAddon && (
             <div className={cn(
               "flex items-center gap-2 px-3 font-medium text-text-secondary dark:text-dark-text-secondary",
               "border border-l-0 border-field-border dark:border-dark-field-border",
@@ -386,8 +389,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               {rightAddon}
             </div>
           )}
+          </div>
+          
+          {labelPosition === 'right' && renderLabel()}
         </div>
         
+        {labelPosition === 'bottom' && renderLabel()}
         {renderHelperText()}
       </div>
     );

@@ -33,9 +33,13 @@ const meta: Meta<typeof Input> = {
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
       description: 'The size of the input',
     },
+    label: {
+      control: 'text',
+      description: 'Label text for the input field',
+    },
     labelPosition: {
       control: 'select',
-      options: ['top', 'inline', 'floating'],
+      options: ['top', 'bottom', 'left', 'right'],
       description: 'Position of the label relative to the input',
     },
     disabled: {
@@ -61,6 +65,10 @@ const meta: Meta<typeof Input> = {
     fullWidth: {
       control: 'boolean',
       description: 'Whether the input should take full width',
+    },
+    required: {
+      control: 'boolean',
+      description: 'Whether the input field is required (adds * to label)',
     },
   },
 };
@@ -111,18 +119,24 @@ export const WithLabels: Story = {
         placeholder="Label positioned at top" 
       />
       <Input 
-        label="Inline Label" 
-        labelPosition="inline" 
-        placeholder="Label positioned inline" 
+        label="Bottom Label" 
+        labelPosition="bottom" 
+        placeholder="Label positioned at bottom" 
       />
       <Input 
-        label="Floating Label" 
-        labelPosition="floating" 
-        placeholder=" " 
+        label="Left Label" 
+        labelPosition="left" 
+        placeholder="Label positioned at left" 
+      />
+      <Input 
+        label="Right Label" 
+        labelPosition="right" 
+        placeholder="Label positioned at right" 
       />
       <Input 
         label="Required Field" 
         required 
+        labelPosition="top"
         placeholder="This field is required" 
       />
     </div>
