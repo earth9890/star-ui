@@ -4,21 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CSS Variables for theming */
-:root {
-  --star-background: rgb(255, 255, 255);
-  --star-foreground: rgb(15, 23, 42);
-  --star-card: rgb(255, 255, 255);
-  --star-border: rgb(226, 232, 240);
-  --star-primary: rgb(99, 102, 241);
-}
-
-.dark {
-  --star-background: rgb(2, 8, 23);
-  --star-foreground: rgb(248, 250, 252);
-  --star-card: rgb(15, 23, 42);
-  --star-border: rgb(30, 41, 59);
-  --star-primary: rgb(129, 140, 248);
+/* Base layer for semantic color application */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  
+  :root.dark {
+    color-scheme: dark;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
 /* Modern animations */
@@ -28,8 +26,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+  0%, 100% { box-shadow: 0 0 20px theme('colors.primary.DEFAULT / 0.3'); }
+  50% { box-shadow: 0 0 40px theme('colors.primary.DEFAULT / 0.6'); }
 }
 
 @keyframes gradient-shift {
@@ -46,10 +44,7 @@
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  @apply bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent;
 }
 
 /* Floating animation */
@@ -64,7 +59,7 @@
 
 /* Animated gradient backgrounds */
 .gradient-animated {
-  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+  background: linear-gradient(-45deg, theme('colors.primary.500'), theme('colors.secondary.500'), theme('colors.primary.600'), theme('colors.secondary.600'));
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
 }

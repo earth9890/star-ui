@@ -21,9 +21,9 @@ function PlaygroundContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-background to-secondary-50 dark:from-dark-background dark:via-dark-background-secondary dark:to-dark-background-tertiary transition-colors duration-500">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(99,102,241,0.15)_1px,transparent_0)] [background-size:50px_50px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,theme(colors.primary.DEFAULT/0.15)_1px,transparent_0)] [background-size:50px_50px]" />
       
       <div className="relative z-10 py-12 px-4">
         <div className="max-w-7xl mx-auto">
@@ -35,7 +35,7 @@ function PlaygroundContent() {
               </h1>
               <ThemeToggle className="float" />
             </div>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
+            <p className="text-xl text-foreground-secondary mb-6">
               🌟 The Future of React Components - Modern, Animated, Revolutionary
             </p>
             <div className="flex justify-center gap-3">
@@ -55,7 +55,7 @@ function PlaygroundContent() {
               <CardContent className="space-y-8">
                 {/* Gradient Variants */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Gradient Magic</h3>
+                  <h3 className="text-lg font-semibold mb-4 text-foreground">Gradient Magic</h3>
                   <div className="flex flex-wrap gap-4">
                     <Button variant="primary" glow>Primary Glow</Button>
                     <Button variant="cosmic" float>Cosmic Float</Button>
@@ -67,7 +67,7 @@ function PlaygroundContent() {
 
                 {/* Glass & Effects */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Glass & Effects</h3>
+                  <h3 className="text-lg font-semibold mb-4 text-foreground">Glass & Effects</h3>
                   <div className="flex flex-wrap gap-4">
                     <Button variant="gradient">Gradient Magic</Button>
                     <Button variant="outline" glow>Outline Glow</Button>
@@ -78,7 +78,7 @@ function PlaygroundContent() {
 
                 {/* Interactive States */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Interactive Magic</h3>
+                  <h3 className="text-lg font-semibold mb-4 text-foreground">Interactive Magic</h3>
                   <div className="flex flex-wrap gap-4">
                     <Button 
                       variant="cosmic" 
@@ -107,7 +107,7 @@ function PlaygroundContent() {
                   <CardDescription>Beautiful elevation and shadow effects</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-foreground-secondary">
                     This card uses modern elevation and shadow effects for a clean, floating appearance.
                   </p>
                 </CardContent>
@@ -123,7 +123,7 @@ function PlaygroundContent() {
                   <CardDescription>Deep space vibes</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-200">
+                  <p className="text-foreground">
                     Experience the cosmos with animated gradients and ethereal glow effects.
                   </p>
                 </CardContent>
@@ -139,7 +139,7 @@ function PlaygroundContent() {
                   <CardDescription>Smooth color transitions</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-foreground-secondary">
                     Subtle gradients that adapt beautifully to both light and dark themes.
                   </p>
                 </CardContent>
@@ -231,8 +231,8 @@ function PlaygroundContent() {
 
           {/* Footer */}
           <footer className="text-center mt-16 pt-8">
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 inline-block shadow-xl">
-              <p className="text-gray-600 dark:text-gray-300 text-lg">
+            <div className="bg-gradient-to-r from-primary-50 to-secondary-50 dark:from-dark-background-secondary dark:to-dark-background-tertiary rounded-2xl p-6 inline-block shadow-xl">
+              <p className="text-foreground-secondary text-lg">
                 ✨ Built with <span className="gradient-text font-semibold">Star UI Lib 2.0</span> • The Future is Here
               </p>
               <div className="flex justify-center gap-2 mt-4">
