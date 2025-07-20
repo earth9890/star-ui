@@ -23,14 +23,14 @@ export interface BadgeProps extends BaseProps {
 }
 
 const badgeVariants = {
-  default: 'bg-gray-100 text-gray-800 border border-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700',
-  primary: 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg',
-  secondary: 'bg-gradient-to-r from-gray-500 to-gray-600 text-white shadow-lg',
-  success: 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg',
-  warning: 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-lg',
-  danger: 'bg-gradient-to-r from-red-500 to-pink-600 text-white shadow-lg',
-  gradient: 'gradient-animated text-white shadow-lg',
-  cosmic: 'bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 bg-[length:200%_200%] text-white shadow-lg animate-pulse',
+  default: 'bg-badge-default text-badge-default-text border border-border-primary dark:bg-dark-background-tertiary dark:text-dark-text-primary dark:border-dark-border-primary',
+  primary: 'bg-gradient-to-r from-badge-primary to-primary-600 text-badge-primary-text shadow-lg',
+  secondary: 'bg-gradient-to-r from-badge-secondary to-secondary-600 text-badge-secondary-text shadow-lg',
+  success: 'bg-gradient-to-r from-badge-success to-success-600 text-badge-success-text shadow-lg',
+  warning: 'bg-gradient-to-r from-badge-warning to-warning-600 text-badge-warning-text shadow-lg',
+  danger: 'bg-gradient-to-r from-badge-danger to-destructive-600 text-badge-danger-text shadow-lg',
+  gradient: 'gradient-animated text-badge-primary-text shadow-lg',
+  cosmic: 'bg-gradient-to-r from-primary-600 via-secondary-600 to-primary-600 bg-[length:200%_200%] text-badge-primary-text shadow-lg animate-pulse',
 };
 
 const badgeSizes = {
@@ -65,8 +65,8 @@ export const Badge: React.FC<BadgeProps> = ({
     >
       {dot && (
         <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3 items-center justify-center">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-support-error opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-support-error-dark" />
         </span>
       )}
       {children}

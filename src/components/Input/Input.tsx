@@ -38,44 +38,44 @@ export interface InputProps
 
 const inputVariants: Record<InputVariant, string> = {
   default: `
-    border border-input-border bg-input shadow-sm
-    hover:border-primary-300 hover:shadow-md
-    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:shadow-lg
-    dark:border-dark-input-border dark:bg-dark-input-DEFAULT dark:shadow-none
-    dark:hover:border-primary-400 dark:hover:shadow-md dark:hover:shadow-primary-500/5
-    dark:focus:border-primary-400 dark:focus:ring-primary-400/20 dark:focus:shadow-lg dark:focus:shadow-primary-500/10
+    border border-field-border bg-field-background shadow-sm
+    hover:border-field-border-hover hover:shadow-md
+    focus:border-field-border-focus focus:ring-4 focus:ring-field-border-focus/10 focus:shadow-lg
+    dark:border-dark-field-border dark:bg-dark-field-background dark:shadow-none
+    dark:hover:border-dark-border-secondary dark:hover:shadow-md dark:hover:shadow-primary-500/5
+    dark:focus:border-dark-field-border-focus dark:focus:ring-dark-field-border-focus/20 dark:focus:shadow-lg dark:focus:shadow-primary-500/10
   `,
   outline: `
-    border-2 border-primary-200 bg-transparent shadow-sm
+    border-2 border-border-interactive bg-transparent shadow-sm
     hover:border-primary-400 hover:shadow-md hover:shadow-primary-500/10
-    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/20 focus:shadow-lg
-    dark:border-primary-800 dark:shadow-none
+    focus:border-field-border-focus focus:ring-4 focus:ring-field-border-focus/20 focus:shadow-lg
+    dark:border-dark-border-interactive dark:shadow-none
     dark:hover:border-primary-600 dark:hover:shadow-md dark:hover:shadow-primary-500/10
-    dark:focus:border-primary-500 dark:focus:ring-primary-400/20 dark:focus:shadow-lg dark:focus:shadow-primary-500/20
+    dark:focus:border-dark-field-border-focus dark:focus:ring-dark-field-border-focus/20 dark:focus:shadow-lg dark:focus:shadow-primary-500/20
   `,
   filled: `
     border border-transparent bg-gradient-to-b from-background-secondary to-background-tertiary shadow-inner
-    hover:from-background-tertiary hover:to-neutral-100 hover:shadow-sm
-    focus:from-background-tertiary focus:to-neutral-100 focus:ring-4 focus:ring-primary-500/10 focus:shadow-md
+    hover:from-field-background-hover hover:to-neutral-100 hover:shadow-sm
+    focus:from-background-tertiary focus:to-neutral-100 focus:ring-4 focus:ring-field-border-focus/10 focus:shadow-md
     dark:from-dark-background-secondary dark:to-dark-background-tertiary
-    dark:hover:from-dark-background-tertiary dark:hover:to-neutral-800
-    dark:focus:from-dark-background-tertiary dark:focus:to-neutral-800 dark:focus:ring-primary-400/20
+    dark:hover:from-dark-field-background-hover dark:hover:to-neutral-800
+    dark:focus:from-dark-background-tertiary dark:focus:to-neutral-800 dark:focus:ring-dark-field-border-focus/20
   `,
   ghost: `
     border border-transparent bg-transparent
-    hover:bg-background-secondary/50 hover:shadow-sm
-    focus:bg-background-secondary focus:ring-4 focus:ring-primary-500/10 focus:shadow-md
-    dark:hover:bg-dark-background-secondary/50
-    dark:focus:bg-dark-background-secondary dark:focus:ring-primary-400/20
+    hover:bg-field-background-hover/50 hover:shadow-sm
+    focus:bg-field-background-hover focus:ring-4 focus:ring-field-border-focus/10 focus:shadow-md
+    dark:hover:bg-dark-field-background-hover/50
+    dark:focus:bg-dark-field-background-hover dark:focus:ring-dark-field-border-focus/20
   `,
   flushed: `
-    border-b-2 border-t-0 border-l-0 border-r-0 border-input-border
+    border-b-2 border-t-0 border-l-0 border-r-0 border-field-border
     bg-transparent rounded-none px-0
-    hover:border-primary-300
-    focus:border-primary-500 focus:shadow-[0_2px_0_0_rgba(59,130,246,0.5)]
-    dark:border-dark-input-border
-    dark:hover:border-primary-400
-    dark:focus:border-primary-400 dark:focus:shadow-[0_2px_0_0_rgba(96,165,250,0.5)]
+    hover:border-field-border-hover
+    focus:border-field-border-focus focus:shadow-[0_2px_0_0_rgba(59,130,246,0.5)]
+    dark:border-dark-field-border
+    dark:hover:border-dark-border-secondary
+    dark:focus:border-dark-field-border-focus dark:focus:shadow-[0_2px_0_0_rgba(96,165,250,0.5)]
   `,
 };
 
@@ -139,15 +139,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     
     const baseClasses = `
       relative w-full font-medium
-      text-input-foreground placeholder:text-input-placeholder
-      dark:text-dark-input-foreground dark:placeholder:text-dark-input-placeholder
+      text-field-text placeholder:text-field-placeholder
+      dark:text-dark-text-primary dark:placeholder:text-dark-text-muted
       transition-all duration-300 ease-out outline-none
       disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none
     `;
 
     const stateClasses = cn({
-      'border-destructive-500 focus:border-destructive-600 focus:ring-destructive-500/20 shadow-destructive-100 dark:border-destructive-400 dark:focus:border-destructive-500 dark:shadow-destructive-500/10': error,
-      'border-success-500 focus:border-success-600 focus:ring-success-500/20 shadow-success-100 dark:border-success-400 dark:focus:border-success-500 dark:shadow-success-500/10': success && !error,
+      'border-field-border-error focus:border-support-error-dark focus:ring-support-error/20 shadow-support-error-light dark:border-support-error dark:focus:border-support-error-dark dark:shadow-support-error/10': error,
+      'border-support-success focus:border-support-success-dark focus:ring-support-success/20 shadow-support-success-light dark:border-support-success dark:focus:border-support-success-dark dark:shadow-support-success/10': success && !error,
     });
 
     const effectClasses = cn({
@@ -184,7 +184,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       if (!label) return null;
 
       const labelClasses = cn(
-        'text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary',
+        'text-sm font-semibold text-field-label dark:text-dark-text-secondary',
         {
           'mb-2 block': labelPosition === 'top',
           'ml-2 inline-flex items-center': labelPosition === 'inline',
@@ -195,7 +195,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       return (
         <label htmlFor={inputId} className={labelClasses}>
           {label}
-          {required && <span className="text-destructive-500 ml-1">*</span>}
+          {required && <span className="text-support-error ml-1">*</span>}
         </label>
       );
     };
@@ -207,9 +207,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       const helperClasses = cn(
         'mt-1.5 text-sm',
         {
-          'text-destructive-600 dark:text-destructive-400': errorMessage,
-          'text-success-600 dark:text-success-400': successMessage && !errorMessage,
-          'text-foreground-tertiary dark:text-dark-foreground-tertiary': !errorMessage && !successMessage,
+          'text-text-error dark:text-support-error': errorMessage,
+          'text-text-success dark:text-support-success': successMessage && !errorMessage,
+          'text-field-helper dark:text-dark-text-tertiary': !errorMessage && !successMessage,
         }
       );
 
@@ -234,7 +234,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {labelPosition === 'inline' && renderLabel()}
           
           {leftAddon && (
-            <div className="flex items-center px-3 bg-gradient-to-b from-background-secondary to-background-tertiary dark:from-dark-background-secondary dark:to-dark-background-tertiary border border-r-0 border-input-border dark:border-dark-input-border rounded-l-xl shadow-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+            <div className="flex items-center px-3 bg-gradient-to-b from-background-secondary to-background-tertiary dark:from-dark-background-secondary dark:to-dark-background-tertiary border border-r-0 border-field-border dark:border-dark-field-border rounded-l-xl shadow-sm font-medium text-text-secondary dark:text-dark-text-secondary">
               {leftAddon}
             </div>
           )}
@@ -244,7 +244,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             
             {leftIcon && (
               <div 
-                className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-foreground-muted dark:text-dark-foreground-muted pointer-events-none"
+                className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-field-icon dark:text-dark-text-muted pointer-events-none"
                 style={{ width: iconSizes[size], height: iconSizes[size] }}
               >
                 {React.isValidElement(leftIcon) && React.cloneElement(leftIcon as React.ReactElement<any>, {
@@ -270,7 +270,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               <button
                 type="button"
                 onClick={handleClear}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground-muted hover:text-foreground dark:text-dark-foreground-muted dark:hover:text-dark-foreground transition-colors rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 p-0.5"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-icon-secondary hover:text-icon-primary dark:text-dark-text-muted dark:hover:text-dark-text-primary transition-colors rounded-full hover:bg-background-secondary dark:hover:bg-dark-background-tertiary p-0.5"
                 style={{ width: iconSizes[size] + 4, height: iconSizes[size] + 4 }}
               >
                 <X size={iconSizes[size]} strokeWidth={2} />
@@ -279,7 +279,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             
             {loading && (
               <div 
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-primary-500 dark:text-primary-400"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-icon-interactive dark:text-dark-border-interactive"
                 style={{ width: iconSizes[size], height: iconSizes[size] }}
               >
                 <svg className="animate-spin w-full h-full" fill="none" viewBox="0 0 24 24">
@@ -291,7 +291,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             
             {rightIcon && !loading && !clearable && (
               <div 
-                className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-foreground-muted dark:text-dark-foreground-muted pointer-events-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-field-icon dark:text-dark-text-muted pointer-events-none"
                 style={{ width: iconSizes[size], height: iconSizes[size] }}
               >
                 {React.isValidElement(rightIcon) && React.cloneElement(rightIcon as React.ReactElement<any>, {
@@ -305,7 +305,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           </div>
           
           {rightAddon && (
-            <div className="flex items-center px-3 bg-gradient-to-b from-background-secondary to-background-tertiary dark:from-dark-background-secondary dark:to-dark-background-tertiary border border-l-0 border-input-border dark:border-dark-input-border rounded-r-xl shadow-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+            <div className="flex items-center px-3 bg-gradient-to-b from-background-secondary to-background-tertiary dark:from-dark-background-secondary dark:to-dark-background-tertiary border border-l-0 border-field-border dark:border-dark-field-border rounded-r-xl shadow-sm font-medium text-text-secondary dark:text-dark-text-secondary">
               {rightAddon}
             </div>
           )}

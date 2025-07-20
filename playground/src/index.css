@@ -14,7 +14,7 @@
   }
   
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background-primary text-text-primary dark:bg-dark-background-primary dark:text-dark-text-primary;
   }
 }
 

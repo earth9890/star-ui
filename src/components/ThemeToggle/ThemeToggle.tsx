@@ -24,9 +24,10 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
       onClick={toggleTheme}
       className={cn(
         'relative rounded-xl p-2 transition-all duration-300 ease-out',
-        'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700',
-        'focus:outline-none focus:ring-4 focus:ring-blue-500/20',
+        'bg-background-secondary hover:bg-background-tertiary dark:bg-dark-background-secondary dark:hover:bg-dark-background-tertiary',
+        'focus:outline-none focus:ring-4 focus:ring-border-interactive/20 dark:focus:ring-dark-border-interactive/20',
         'hover:scale-110 active:scale-95',
+        'shadow-sm hover:shadow-md',
         sizes[size],
         className
       )}
@@ -36,7 +37,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
         {/* Sun Icon */}
         <svg
           className={cn(
-            'absolute inset-0 h-full w-full text-yellow-500 transition-all duration-500',
+            'absolute inset-0 h-full w-full text-warning-500 transition-all duration-500',
             isDark ? 'rotate-90 opacity-0' : 'rotate-0 opacity-100'
           )}
           fill="none"
@@ -54,7 +55,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
         {/* Moon Icon */}
         <svg
           className={cn(
-            'absolute inset-0 h-full w-full text-blue-400 transition-all duration-500',
+            'absolute inset-0 h-full w-full text-info-400 transition-all duration-500',
             isDark ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0'
           )}
           fill="none"

@@ -13,10 +13,10 @@ export interface CardProps extends BaseProps {
 }
 
 const cardVariants = {
-  default: 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm',
-  gradient: 'bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-700/50 shadow-lg',
-  cosmic: 'bg-gradient-to-br from-purple-900/90 via-blue-900/90 to-purple-900/90 border border-purple-500/30 shadow-2xl text-white',
-  elevated: 'bg-white dark:bg-gray-800 border-0 shadow-2xl shadow-gray-900/10 dark:shadow-black/20',
+  default: 'bg-card-background dark:bg-dark-card-background border border-card-border dark:border-dark-card-border shadow-sm',
+  gradient: 'bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-primary-900/20 dark:to-secondary-900/20 border border-primary-200/50 dark:border-primary-700/50 shadow-lg',
+  cosmic: 'bg-gradient-to-br from-primary-900/90 via-secondary-900/90 to-primary-900/90 border border-primary-500/30 shadow-2xl text-text-on-color',
+  elevated: 'bg-card-background dark:bg-dark-card-background border-0 shadow-2xl shadow-neutral-900/10 dark:shadow-black/20',
 };
 
 const cardPadding = {
@@ -62,13 +62,13 @@ export const CardHeader: React.FC<BaseProps> = ({ children, className, ...props 
 );
 
 export const CardTitle: React.FC<BaseProps> = ({ children, className, ...props }) => (
-  <h3 className={cn('text-xl font-semibold text-gray-900 dark:text-white', className)} {...props}>
+  <h3 className={cn('text-xl font-semibold text-card-text dark:text-dark-text-primary', className)} {...props}>
     {children}
   </h3>
 );
 
 export const CardDescription: React.FC<BaseProps> = ({ children, className, ...props }) => (
-  <p className={cn('text-gray-600 dark:text-gray-400', className)} {...props}>
+  <p className={cn('text-card-text-secondary dark:text-dark-text-secondary', className)} {...props}>
     {children}
   </p>
 );

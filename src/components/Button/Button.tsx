@@ -25,15 +25,15 @@ export interface ButtonProps extends BaseProps, React.ButtonHTMLAttributes<HTMLB
 }
 
 const buttonVariants = {
-  primary: 'bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:bg-primary-600 focus-visible:ring-primary',
-  secondary: 'bg-secondary text-secondary-foreground shadow-lg hover:shadow-xl hover:bg-secondary-600 focus-visible:ring-secondary',
-  outline: 'border-2 border-primary bg-transparent text-primary hover:bg-primary/5 dark:hover:bg-primary/10 focus-visible:ring-primary',
-  ghost: 'text-foreground hover:bg-background-secondary focus-visible:ring-neutral-500',
-  gradient: 'bg-gradient-to-r from-primary-500 to-primary-700 text-primary-foreground shadow-lg hover:shadow-xl transform hover:scale-[1.02] focus-visible:ring-primary',
-  cosmic: 'bg-gradient-to-r from-primary-600 via-secondary-600 to-primary-600 bg-[length:200%_200%] text-white shadow-lg hover:shadow-xl animate-pulse focus-visible:ring-primary',
-  sunset: 'bg-gradient-to-r from-warning-500 to-destructive-400 text-white shadow-lg hover:shadow-xl hover:from-warning-600 hover:to-destructive-500 focus-visible:ring-warning',
-  ocean: 'bg-gradient-to-r from-info-500 to-primary-500 text-white shadow-lg hover:shadow-xl hover:from-info-600 hover:to-primary-600 focus-visible:ring-info',
-  destructive: 'bg-destructive text-destructive-foreground shadow-lg hover:shadow-xl hover:bg-destructive-600 focus-visible:ring-destructive',
+  primary: 'bg-button-primary text-button-text shadow-lg hover:shadow-xl hover:bg-button-primary-hover focus-visible:ring-button-primary',
+  secondary: 'bg-button-secondary text-button-text shadow-lg hover:shadow-xl hover:bg-button-secondary-hover focus-visible:ring-button-secondary',
+  outline: 'border-2 border-button-primary bg-transparent text-button-primary hover:bg-button-primary/5 dark:hover:bg-button-primary/10 focus-visible:ring-button-primary',
+  ghost: 'text-button-text-ghost hover:bg-button-ghost-hover dark:hover:bg-dark-button-ghost-hover focus-visible:ring-neutral-500',
+  gradient: 'bg-gradient-to-r from-primary-500 to-primary-700 text-button-text shadow-lg hover:shadow-xl transform hover:scale-[1.02] focus-visible:ring-primary-500',
+  cosmic: 'bg-gradient-to-r from-primary-600 via-secondary-600 to-primary-600 bg-[length:200%_200%] text-button-text shadow-lg hover:shadow-xl animate-pulse focus-visible:ring-primary-500',
+  sunset: 'bg-gradient-to-r from-warning-500 to-destructive-400 text-button-text shadow-lg hover:shadow-xl hover:from-warning-600 hover:to-destructive-500 focus-visible:ring-warning-500',
+  ocean: 'bg-gradient-to-r from-info-500 to-primary-500 text-button-text shadow-lg hover:shadow-xl hover:from-info-600 hover:to-primary-600 focus-visible:ring-info-500',
+  destructive: 'bg-button-destructive text-button-text shadow-lg hover:shadow-xl hover:bg-button-destructive-hover focus-visible:ring-button-destructive',
 };
 
 const buttonSizes = {
@@ -66,7 +66,7 @@ export const Button: React.FC<ButtonProps> = ({
         'relative inline-flex items-center justify-center rounded-xl font-medium',
         'transition-all duration-300 ease-out',
         'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-        'focus-visible:ring-offset-background dark:focus-visible:ring-offset-dark-background',
+        'focus-visible:ring-offset-background-primary dark:focus-visible:ring-offset-dark-background-primary',
         'active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:transform-none',
         'overflow-hidden',
         buttonVariants[variant],
