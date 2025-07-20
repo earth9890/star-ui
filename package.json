@@ -22,7 +22,9 @@
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run lint && npm run typecheck && npm run build"
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run build",
+    "version": "npm run build && git add -A dist",
+    "postversion": "git push && git push --tags"
   },
   "keywords": [
     "react",

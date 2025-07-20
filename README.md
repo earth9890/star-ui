@@ -121,4 +121,4 @@ The playground runs at `http://localhost:3000` and automatically uses your lates
 
 ## License
 
-MIT © [Your Name]
+MIT © Harish Sugandhi
