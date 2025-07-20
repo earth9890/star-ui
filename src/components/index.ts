@@ -20,3 +20,7 @@ export type { BadgeProps, BadgeVariant, BadgeSize } from './Badge/Badge';
 // Theme Toggle
 export { ThemeToggle } from './ThemeToggle/ThemeToggle';
 export type { ThemeToggleProps } from './ThemeToggle/ThemeToggle';
+
+// Input
+export { Input } from './Input/Input';
+export type { InputProps, InputVariant } from './Input/Input';
