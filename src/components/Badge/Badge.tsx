@@ -64,7 +64,7 @@ export const Badge: React.FC<BadgeProps> = ({
       {...props}
     >
       {dot && (
-        <span className="absolute -top-1.5 -right-1.5 flex h-3 w-3 items-center justify-center">
+        <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3 items-center justify-center">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
           <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
         </span>
